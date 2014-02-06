@@ -1,0 +1,218 @@
+/* General 
+================================================== */
+
+body, html {
+  background: @white;
+}
+
+
+
+/* Colors
+================================================== */
+
+@lightgray: #7d7d7d;
+
+@gray: #666666;
+
+@darkgray: #504f4f;
+
+@black: #333333; 
+
+@white: #ffffff;
+
+@offwhite: #f9f7f6;
+
+
+
+/* Mixins
+================================================== */
+
+
+.border-radius (@radius: 50%) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.fade (@fadelevel: 0.3s) {
+  -webkit-transition: all @fadelevel ease-in-out; -moz-transition: all @fadelevel ease-in-out; -o-transition: all @fadelevel ease-in-out; -ms-transition: all @fadelevel ease-in-out; transition: all @fadelevel ease-in-out;
+}
+
+.backgroundsizesupportie8 (@bgimgurl: '../../themes/themename/img/image.png') {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='@bgimgurl',
+    sizingMethod='scale');
+}
+
+.box-shadow (@shadowcolor: #000){
+  -moz-box-shadow: 1px 1px 2px @shadowcolor;
+  -webkit-box-shadow: 1px 1px 2px @shadowcolor;
+  box-shadow: 1px 1px 2px @shadowcolor;
+}
+
+.rotate ( @deg: 45deg ) {
+  -webkit-transform: rotate(@deg);
+  -moz-transform:    rotate(@deg);
+  -ms-transform:     rotate(@deg);
+  -o-transform:      rotate(@deg);
+}
+
+.transform-origin (@xaxis: 0, @yaxis: 50%) {
+      -ms-transform-origin: @xaxis @yaxis;
+      -webkit-transform-origin: @xaxis @yaxis;
+      transform-origin: @xaxis @yaxis;
+}
+
+.opacity(@opacity: 0.5) {
+  -moz-opacity: @opacity;
+  -khtml-opacity: @opacity;
+  -webkit-opacity: @opacity;
+  opacity: @opacity;
+  @opperc: @opacity * 100;
+  // -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+  filter: ~"alpha(opacity=@{opperc})";
+}
+
+.animation( @animationname: animation-name, @animationduration: 5s, @animationstop: infinite ) {
+  -webkit-animation: @animationname @animationduration @animationstop; /* Safari 4+ */
+  -moz-animation:    @animationname @animationduration @animationstop; /* Fx 5+ */
+  -o-animation:      @animationname @animationduration @animationstop; /* Opera 12+ */
+  animation:         @animationname @animationduration @animationstop; /* IE 10+ */
+}
+
+.animation-play-state ( @playstate: paused ) {
+  animation-play-state: @playstate;
+  -webkit-animation-play-state: @playstate;
+}
+
+.animation-delay (@animationdelay: 100ms) {
+  animation-delay: @animationdelay;
+  -webkit-animation-delay: @animationdelay;
+  -moz-animation-delay: @animationdelay;
+}
+
+.backface-visibility (@backface: hidden) {
+    backface-visibility: @backface;
+  -webkit-backface-visibility: @backface;
+  -moz-backface-visibility: @backface;
+}
+
+.notselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/* Clearfix
+================================================== */
+
+.clearfix:before, .clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  overflow: hidden;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1; /* IE < 8 */
+}
+
+.floatright {
+  float: right;
+}
+
+.floatleft {
+  float: left;
+}
+
+
+
+
+/* Animations 
+================================================== */
+
+@-webkit-keyframes animation-move-east {
+  0%   { margin-left: 0; }
+  100% { margin-left: -29%; }
+}
+@-moz-keyframes animation-move-east {
+  0%   { margin-left: 0; }
+  100% { margin-left: -29%; }
+}
+@-o-keyframes animation-move-east {
+  0%   { margin-left: 0; }
+  100% { margin-left: -29%; }
+}
+@keyframes animation-move-east {
+  0%   { margin-left: 0; }
+  100% { margin-left: -29%; }
+}
+
+
+
+
+/* If SVG is supported in this browser 
+================================================== */
+
+html.svg {
+
+}
+
+
+
+/* Generic Form Styles
+================================================== */
+
+form {
+  margin-bottom: 10px;
+
+  input {
+    width: 100%;
+    max-width: 300px;
+    height: 40px;
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    .border-radius(3px);
+    border: 1px solid @lightgray;
+    color: @lightgray;
+    font-size: 16px;
+    font-weight: 100;
+    float: left;
+
+    &.submitbutton, &[type="submit"] {
+      background: @gray;
+      max-width: 170px;
+      border: 0px;
+      color: @white;
+      font-size: 14px;
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
+  }
+}
+
+
+
+/* CSS Tables 
+================================================== */
+
+.table {
+  display: table;
+
+  .table-row {
+    display: table-row;
+
+    .table-cell {
+      display: table-cell;
+    }
+  }
+}
+

@@ -1,4 +1,4 @@
-vgd-framework
+vgd-wp-framework
 =============
 
-The VGD Wordpress Theme Framework 
+The Vertical Grain Design Wordpress Theme Framework
