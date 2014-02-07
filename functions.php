@@ -9,15 +9,6 @@
 
 
 
-/* Call Mobble plugin into framework 
-================================================== */
-
-	// Include the class
-	require_once( 'inc/mobble/mobble.php' );
-
-
-
-
 /* Enque Some Styles
 ================================================== */
 
@@ -65,13 +56,16 @@
 			wp_register_script('modernizer', ( get_template_directory_uri() . "/js/modernizr.js"), '', '2.6.2', false);
 			wp_enqueue_script('modernizer');
 			}
-			
 
-				if( !is_admin()){ 
-				wp_register_script('respond', ( get_template_directory_uri() . "/js/respond.min.js"), '', '1.4.2', true);
-				wp_enqueue_script('respond');
-				}
+			if( !is_admin()){ 
+			wp_register_script('detectizr', ( get_template_directory_uri() . "/js/detectizr.min.js"), '', '1.5.0', false);
+			wp_enqueue_script('detectizr');
+			}			
 			
+			// if( !is_admin()){ 
+			// wp_register_script('respond', ( get_template_directory_uri() . "/js/respond.min.js"), '', '1.4.2', true);
+			// wp_enqueue_script('respond');
+			// }
 
 			// if( !is_admin()){ 
 			// wp_register_script('backstretch', ( get_template_directory_uri() . "/js/jquery.backstretch.min.js"), '', '2.0.4', false);
@@ -99,7 +93,7 @@
 			// }
 
 			if( !is_admin()){ 
-			wp_register_script('mmenu', ( get_template_directory_uri() . "/js/jquery.mmenu.min.js"), '', '3.0.5', true);
+			wp_register_script('mmenu', ( get_template_directory_uri() . "/js/jquery.mmenu.min.js"), '', '3.0.5', false);
 			wp_enqueue_script('mmenu');
 			}
 
@@ -119,7 +113,7 @@
 			// }					
 
 			if( !is_admin()){ 
-			wp_register_script('theme-scripts', ( get_template_directory_uri() . "/js/theme-scripts.js"), '', '0.5', false);
+			wp_register_script('theme-scripts', ( get_template_directory_uri() . "/js/theme-scripts.js"), '', '0.5', true);
 			wp_enqueue_script('theme-scripts');
 			}
 		}
@@ -169,6 +163,7 @@
 			wp_deregister_script('l10n');
 		  }
 		}
+
 
 
 /* Custom Post Types
@@ -270,26 +265,6 @@
 
 
 
-
-/* Add a mobile body class for mobile devices 
-================================================== */
-
-	add_filter('body_class','my_class_names');
-
-	function my_class_names($classes) {
-	   
-		if ( is_mobile() ) {
-		    $classes[] = 'mobile';
-		    return $classes;
-		} elseif ( is_tablet() ) {
-			 $classes[] = 'tablet';
-		    return $classes;
-		} else {
-			$classes[] = 'notmobile';
-			return $classes;
-		}
-
-	}
 
 
 
