@@ -7,6 +7,10 @@
 	require_once( 'inc/wp-less/wp-less.php' );
 
 
+	// Include the mobile detection script 
+	require_once( 'inc/Mobile_Detect.php' ); 
+	$detect = new Mobile_Detect;
+
 
 
 /* Enque Some Styles
@@ -271,21 +275,18 @@
 /* Add browser specific body classes
 ================================================== */
 
-	function organizedthemes_browser_body_class($classes) {
-	 
-	    global $is_gecko, $is_IE, $is_opera, $is_safari, $is_chrome;
-	 
-	    if($is_gecko)      $classes[] = 'gecko';
-	    elseif($is_opera)  $classes[] = 'opera';
-	    elseif($is_safari) $classes[] = 'safari';
-	    elseif($is_chrome) $classes[] = 'chrome';
-	    elseif($is_IE)     $classes[] = 'ie';
-	    else               $classes[] = 'unknown';
-	 
-	    return $classes;
+
+	function browser_body_class($classes) {
+
+		if ( $detect->isMobile() ) 		$classes[] = 'is-mobile';
+		elseif ( $detect->isTablet() ) 	$classes[] = 'is-tablet';
+		elseif ( $detect->isDesktop() ) $classes[] = 'is-desktop';
+		else 							$classes[] = 'unknown';
+
+		return $classes;
 	 
 	}
-	add_filter('body_class','organizedthemes_browser_body_class');
+	add_filter('body_class','browser_body_class');
 
 
 

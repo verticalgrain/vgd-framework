@@ -102,9 +102,47 @@ jQuery.noConflict();
     function slidesJs() {
 
 	    jQuery(function(){
-	      jQuery(".slider").slidesjs({
+	      jQuery(".home-slider").slidesjs({
 	        width: 1000,
-	        height: 650
+	        height: 650,
+			pagination: {
+			  active: false
+			},
+			navigation: {
+				active: false
+			},
+			play: {
+				active: false,
+				interval: 5000,
+				effect: 'fade',
+				auto: true,
+			},
+			effect: {
+				fade: {
+					speed: 1000,
+					crossfade: true
+				}
+			},
+			callback: {
+				loaded: function(current) {
+					if (current <= 1) {
+						// ShawSlides.Common.sliderNavToggle; // Need some help to do this one
+						jQuery('.slidesjs-previous').toggleClass('opaque');
+					}
+				},
+				start: function(current) {
+				},
+				complete: function(current) {
+					jQuery('.slidesjs-navigation').removeClass('opaque');
+
+					if (current <= 1) {
+						jQuery('.slidesjs-previous').toggleClass('opaque');
+					} else if (current >= totalslides) {
+						clearInterval(jQuery('.home-slider').data('interval'));
+						jQuery('.slidesjs-next').toggleClass('opaque');
+					}
+				}
+	        }			
 	      });
 	    });
 
@@ -200,29 +238,38 @@ jQuery.noConflict();
 			
 			function initialize()
 			{
+				myCenter = new google.maps.LatLng(53.426144,-113.606014);
+
 				var mapProp = {
-			  		center:new google.maps.LatLng(49.288565,-123.121548),
+			  		center: new google.maps.LatLng(53.426144,-113.606014),
 			  		zoom: 10,
 			  		scrollwheel: false,
 			  		streetViewControl: false,
 			  		mapTypeId: google.maps.MapTypeId.ROADMAP	  
 				};
 
-			  	var map=new google.maps.Map(document.getElementById("map"),mapProp);
 
-			 //  	var marker=new google.maps.Marker({
-				//   position:myCenter,
-				//   map: map,
-				//   icon: '../wp-content/themes/loelliot/images/loelliot-marker.png',
-				// });
+			  	var map = new google.maps.Map(document.getElementById("contact-page-map"),mapProp);
 
-				// marker.setMap(map);
+				var markerimage = {
+			        url: '../wp-content/themes/ambleside/images/mapmarker.png',
+			        anchor: new google.maps.Point(100,150),
+			    };
+	
+				var marker=new google.maps.Marker({
+					position:myCenter,
+					map: map,
+					icon: markerimage
+				});
 
-				/* markers */
+				marker.setMap(map);
 
+				/* Multiple markers, with info boxes
 					// Bounds variable
 					var bounds = new google.maps.LatLngBounds();
 
+					map.fitBounds(bounds);
+					
 				    // Multiple Markers
 				    var markers = [
 				        ['Canada Financial Group Head Office, Vancouver', 49.288565,-123.121548],
@@ -266,65 +313,65 @@ jQuery.noConflict();
 
 				        // Automatically center the map fitting all markers on the screen
 				        map.fitBounds(bounds);
-				    }				
+				    }	
 
-
+				*/
 
 				var stylesArray = 
 				
-					[
-					  {
-					    "featureType": "water",
-					    "elementType": "geometry.fill",
-					    "stylers": [
-					      { "color": "#eaeaea" }
-					    ]
-					  },{
-					    "featureType": "poi.park",
-					    "elementType": "geometry.fill",
-					    "stylers": [
-					      { "color": "#fafafa" }
-					    ]
-					  },{
-					    "featureType": "road.highway",
-					    "elementType": "geometry",
-					    "stylers": [
-					      { "color": "#999a99" }
-					    ]
-					  },{
-					    "featureType": "transit.line",
-					    "elementType": "geometry",
-					    "stylers": [
-					      { "color": "#a3a3a3" }
-					    ]
-					  },{
-					    "featureType": "poi",
-					    "elementType": "geometry",
-					    "stylers": [
-					      { "color": "#fbfafa" }
-					    ]
-					  },{
-					    "featureType": "transit.line",
-					    "elementType": "labels.text.stroke",
-					    "stylers": [
-					      { "visibility": "off" }
-					    ]
-					  },{
-					    "featureType": "landscape",
-					    "elementType": "geometry.fill",
-					    "stylers": [
-					      { "color": "#faf9fa" }
-					    ]
-					  },{
-					    "featureType": "transit.station",
-					    "stylers": [
-					      { "color": "#faf9fa" }
-					    ]
-					  },{
-					  }
-					]
+				[
+				  {
+				    "featureType": "water",
+				    "elementType": "geometry.fill",
+				    "stylers": [
+				      { "color": "#eaeaea" }
+				    ]
+				  },{
+				    "featureType": "poi.park",
+				    "elementType": "geometry.fill",
+				    "stylers": [
+				      { "color": "#fafafa" }
+				    ]
+				  },{
+				    "featureType": "road.highway",
+				    "elementType": "geometry",
+				    "stylers": [
+				      { "color": "#999a99" }
+				    ]
+				  },{
+				    "featureType": "transit.line",
+				    "elementType": "geometry",
+				    "stylers": [
+				      { "color": "#a3a3a3" }
+				    ]
+				  },{
+				    "featureType": "poi",
+				    "elementType": "geometry",
+				    "stylers": [
+				      { "color": "#fbfafa" }
+				    ]
+				  },{
+				    "featureType": "transit.line",
+				    "elementType": "labels.text.stroke",
+				    "stylers": [
+				      { "visibility": "off" }
+				    ]
+				  },{
+				    "featureType": "landscape",
+				    "elementType": "geometry.fill",
+				    "stylers": [
+				      { "color": "#faf9fa" }
+				    ]
+				  },{
+				    "featureType": "transit.station",
+				    "stylers": [
+				      { "color": "#faf9fa" }
+				    ]
+				  },{
+				  }
+				]
 
-				map.setOptions({styles: stylesArray});
+				//map.setOptions({styles: stylesArray});
 
 			}
 			

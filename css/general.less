@@ -1,6 +1,11 @@
 /* General 
 ================================================== */
 
+html {
+  /* Fixes laggy scrolling in Chrome when using background-size: cover */
+  -webkit-transform: translate3d(0,0,0);
+}
+
 body, html {
   background: @white;
 }
@@ -105,6 +110,12 @@ body, html {
   -ms-user-select: none;
   user-select: none;
 }
+
+.animation (@name, @duration: 300ms, @delay: 0, @ease: ease) {
+  -webkit-animation: @name @duration @delay @ease;
+  -moz-animation:    @name @duration @delay @ease;
+  -ms-animation:     @name @duration @delay @ease;
+}  
 
 
 /* Clearfix
